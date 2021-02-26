@@ -15,7 +15,7 @@ require_once 'database.php';
     <title>Education Platform</title>
 </head>
 <body>
-<a href="index.php"><button type="button">Lista uczniów</button></a>
+<a href="student.php"><button type="button">Lista uczniów</button></a>
 <a href="marks.php"><button type="button">Oceny</button></a>
 <a href="subjects.php"><button type="button">Przedmioty</button></a>
 <a href="teachers.php"><button type="button">Nauczyciele</button></a>

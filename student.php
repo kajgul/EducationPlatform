@@ -23,25 +23,19 @@ require_once 'database.php';
 <br>
 <table>
 <tr>
-<td>id_oceny</td><td>ocena</td><td>komentarz</td><td>przedmiot</td><td>imie ucznia</td><td>nazwisko ucznia</td><td>nauczyciel wpisujący ocenę</td>
+<td>id_student</td><td>e_mail</td><td>name</td><td>surname</td>
 
 <?php
 
-$stmt = $db->prepare('SELECT oceny.id_oceny, oceny.ocena, oceny.komentarz, przedmioty.nazwa, uczniowie.name, 
-uczniowie.surname, nauczyciele.nauczyciel FROM oceny, przedmioty, uczniowie, nauczyciele 
-WHERE nauczyciele.id_nauczyciela = oceny.id_nauczyciela AND przedmioty.id_przedmiotu = oceny.id_przedmiotu 
-AND uczniowie.id_student=oceny.id_ucznia');
+$stmt = $db->prepare('SELECT * FROM uczniowie');
 
 $stmt->execute();
 
 while($row=$stmt->fetch()){
-    echo "<tr><td>".$row['id_oceny']."</td>";
-    echo "<td>".$row['ocena']."</td>";
-    echo "<td>".$row['komentarz']."</td>";
-    echo "<td>".$row['nazwa']."</td>";
-    echo "<td>".$row['name']."</td>";
+    echo "<tr><td>".$row['id_student']."</td>";
     echo "<td>".$row['surname']."</td>";
-    echo "<td>".$row['nauczyciel']."</td></tr>";
+    echo "<td>".$row['name']."</td>";
+    echo "<td>".$row['e_mail']."</td></tr>";
 }
 
 ?>

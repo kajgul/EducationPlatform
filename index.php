@@ -1,45 +1,41 @@
 <?php
-require_once 'database.php';
+session_start();
+
+if (isset($_SESSION['logged_id'])) {
+    header('Location: menu.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        table, th, td {
-         border: 1px solid black;
-        border-collapse: collapse;
-    }
-    </style>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education Platform</title>
+    <title>LMS platforms</title>
 </head>
 <body>
-<a href="index.php"><button type="button">Lista uczniów</button></a>
-<a href="marks.php"><button type="button">Oceny</button></a>
-<a href="subjects.php"><button type="button">Przedmioty</button></a>
-<a href="teachers.php"><button type="button">Nauczyciele</button></a>
-<br>
-<br>
-<table>
-<tr>
-<td>id_student</td><td>e_mail</td><td>name</td><td>surname</td>
+    <div class="conteiner">
+        <header>
+            <h1>Witaj na platformie edukacyjnej ZUZ-EDU</h1>
+        </header>
 
-<?php
-
-$stmt = $db->prepare('SELECT * FROM uczniowie');
-
-$stmt->execute();
-
-while($row=$stmt->fetch()){
-    echo "<tr><td>".$row['id_student']."</td>";
-    echo "<td>".$row['surname']."</td>";
-    echo "<td>".$row['name']."</td>";
-    echo "<td>".$row['e_mail']."</td></tr>";
-}
-
-?>
-   
-</table>
+    <main>
+        <article>
+            <form method="post" action="menu.php">
+                <label>Login <input type="text" name="login"></label>
+                <label>Hasło <input type="password" name="pass"></label>
+                <input type="submit" value="Zaloguj się!">
+                
+                <?php
+                if(isset($_SESSION['bad_attempt'])) {
+                    echo '<p>Niepoprawny login lub hasło</p>';
+                    unset($_SESSION['bad_attempt']);
+                }
+                ?>
+                </form>
+        </article>
+    </main>
+    </div>
 </body>
 </html>
